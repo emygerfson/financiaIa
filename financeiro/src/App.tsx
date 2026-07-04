@@ -1,12 +1,11 @@
-
+import { RouterProvider} from 'react-router-dom'
+import { router } from './router.tsx'  
 
 function App() {
   
 
   return (
-    <>
-      <h1>Ola Mundo</h1>
-    </>
+    <RouterProvider router={router} />
   )
 }
 
