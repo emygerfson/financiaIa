@@ -1,10 +1,13 @@
-import { Clock, TrendingUp, Wallet } from "lucide-react";
+import { Clock, Sun, Moon, TrendingUp, Wallet, Divide } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Buttom } from "./Buttom";
 import React from "react";
+import { useTheme } from "../../hooks/UseTheme";
+import { Divider } from "./Divider";
 
 export function Header() {
     const navigate = useNavigate();
+    const { theme, toggleTheme } = useTheme();
     return (
         <header className="border-b border-(--border) px-6 py-3">
             <nav className="flex items-center justify-between">
@@ -23,6 +26,13 @@ export function Header() {
                     <Buttom variant="ghost"icon={Clock} onClick={() => navigate("/historico")}>
                         <span className="hidden sm:inline">Histórico</span>
                     </Buttom>
+                    <Divider orientation="vertical" spacing="8px" className="hidden sm:block"/>
+                    <Buttom
+                        aria-label={`Mudar para tema ${theme === "light" ? "escuro" : "claro"}`}
+                        variant="ghost"
+                        icon={theme === "light" ? Moon : Sun}
+                        onClick={toggleTheme}
+                    />
                 </div>
                 
             </nav>
