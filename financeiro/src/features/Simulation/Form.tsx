@@ -1,17 +1,24 @@
-import React from "react";
 import { StepProgress } from "../../features/Simulation/Progress";
 import { FormStep } from "./FormStep";
-import { PiggyBank } from "lucide-react";
 import {simulationFormSteps} from '../../data/Simulation'
 import { useState } from "react";
+import { useSimulationStores } from "../../hooks/useSimulationStores";
+import type { SimulationFormData } from "../../data/Simulation";
 
 export function SimulationForm() {
+    const {saveFormDate} = useSimulationStores();
     const [currentStepIndex, setCurrentStep] = useState(0);
+    const [formData, setFormData] = useState<SimulationFormData>({} as SimulationFormData);
     const totalSteps = simulationFormSteps.length;
     const currentStep = simulationFormSteps[currentStepIndex];
 
-    const handleNextStep = () => {
+    const handleNextStep = ( values:string) => {
+        const updateFormData = {...formData, [currentStep.id]: values};
+
+        setFormData(updateFormData);
+
         if (currentStepIndex + 1 > totalSteps - 1) {
+            saveFormDate(updateFormData);
             return;
         } else {
             setCurrentStep((prev)=> prev + 1);

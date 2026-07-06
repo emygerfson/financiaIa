@@ -1,11 +1,10 @@
-import React from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
 import { Input  } from "../../components/shared/Input";
 import {type InputProps} from '../../components/shared/Input'
 import { Buttom } from '../../components/shared/Buttom';
-import { type SyntheticEvent } from "react";
-import{useState} from 'react'
+import { type SyntheticEvent, useState } from "react";
+import { formatCurrencyMask } from '../../utils/currency';
 export interface FormStepProps {
     id: string;
     icon: LucideIcon;
@@ -17,7 +16,7 @@ export interface FormStepProps {
 }
 interface ActionButtomProps {
   onBack: () => void;
-  onNext: () => void;
+  onNext: (value: string) => void;
   hadeBackButtom?: boolean
 }
 export function FormStep({ icon: Icon, title, question, inputProps, submitButtomProps, onBack, onNext, hadeBackButtom }: FormStepProps & ActionButtomProps) {
@@ -28,7 +27,7 @@ export function FormStep({ icon: Icon, title, question, inputProps, submitButtom
     if (!intupValue) {
       return;
     }
-    onNext(); 
+    onNext(intupValue); 
   }
   return (
     <div className="bg-card rounded-2xl p-6 shadow[4px_18px_0px_rgba(0,0,0,0.2)] sm:p-8">
@@ -41,13 +40,19 @@ export function FormStep({ icon: Icon, title, question, inputProps, submitButtom
         <form onSubmit={handleSubmit}>
           <Input {...inputProps}
             value={intupValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={(e) => 
+                setInputValue(
+                  inputProps.prefix === 'R$' ? 
+                  formatCurrencyMask(e.target.value):
+                  e.target.value
+                )
+              }
           />
           <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
             { !hadeBackButtom && (
               
               <Buttom 
-                type="buttom"
+                type="button"
                 onClick={onBack}
                 variant="ghost"
                 className="order-2 flex-1 sm:order-1"
@@ -63,7 +68,7 @@ export function FormStep({ icon: Icon, title, question, inputProps, submitButtom
               type="submit"
               variant="primary"
               className="order-1 flex-1 sm:order-2"
-              incon={!submitButtomProps?.emojiIcon ? ArrowRight : undefined}
+              icon={!submitButtomProps?.emojiIcon ? ArrowRight : undefined}
                disabled={!intupValue}
             >
               { submitButtomProps?.label ?? "Proximo"}

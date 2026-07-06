@@ -1,4 +1,3 @@
-import React from 'react';
 import { SimulationHero } from '../features/Simulation/Hero';
 import { SimulationForm } from '../features/Simulation/Form';
 

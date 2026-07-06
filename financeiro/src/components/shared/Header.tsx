@@ -1,8 +1,7 @@
-import { Clock, Sun, Moon, TrendingUp, Wallet, Divide } from "lucide-react";
+import { Clock, Sun, Moon, TrendingUp, Wallet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Buttom } from "./Buttom";
-import React from "react";
-import { useTheme } from "../../hooks/UseTheme";
+import { useTheme } from "../../hooks/useTheme";
 import { Divider } from "./Divider";
 
 export function Header() {

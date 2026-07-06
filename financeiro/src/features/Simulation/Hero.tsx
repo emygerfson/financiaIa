@@ -1,4 +1,3 @@
-import React from 'react'
 import  PiggyBankImage  from "../../assets/image/porquinho.png"
 
 export function SimulationHero() {
