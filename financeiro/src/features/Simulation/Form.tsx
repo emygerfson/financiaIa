@@ -1,12 +1,14 @@
 import { StepProgress } from "../../features/Simulation/Progress";
 import { FormStep } from "./FormStep";
 import {simulationFormSteps} from '../../data/Simulation'
-import { useState } from "react";
+import { useState  } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSimulationStores } from "../../hooks/useSimulationStores";
 import type { SimulationFormData } from "../../data/Simulation";
 
 export function SimulationForm() {
     const {saveFormDate} = useSimulationStores();
+    const navigate = useNavigate();
     const [currentStepIndex, setCurrentStep] = useState(0);
     const [formData, setFormData] = useState<SimulationFormData>({} as SimulationFormData);
     const totalSteps = simulationFormSteps.length;
@@ -19,6 +21,7 @@ export function SimulationForm() {
 
         if (currentStepIndex + 1 > totalSteps - 1) {
             saveFormDate(updateFormData);
+            void navigate('/resultado');
             return;
         } else {
             setCurrentStep((prev)=> prev + 1);
