@@ -5,7 +5,7 @@ interface CardProps {
     label: string
     value: string
     subtitle: string
-    variant: 'default' | 'primary' 
+    variant?: 'default' | 'primary' 
 }
 
 const variantClass = {

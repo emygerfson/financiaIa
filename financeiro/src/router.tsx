@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
         element: <FormulationFormPage /> ,
       },
       {
-        path: "/resultado",
+        path: "/resultado/:id",
         element: <SimulationResultsPage />,
       },
       {

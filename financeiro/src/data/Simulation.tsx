@@ -5,7 +5,7 @@ export type SimulationFormData = Record<string, string>;
 
 export const simulationFormSteps  = [
     {
-        id: "icone",
+        id: "income",
         icon: PiggyBank,
         title: "Renda Mensal Bruta",
         question: "Quanto e depositado na sua conta mensalmente(some todas as fontes)?",
@@ -80,3 +80,5 @@ export const simulationFormSteps  = [
 ] satisfies FormStepProps[]   
 
 export type SimulationFormStep = Record<(typeof simulationFormSteps)[number]['id'], string>;
+
+export type SimulationRecord = SimulationFormData & { id: string };
